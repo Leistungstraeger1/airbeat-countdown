@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Airbeat One Countdown</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: monospace;
+      color: #fff;
+      text-shadow: 2px 2px 5px #000;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-top: 50px;
+    }
+
+    #countdown {
+      font-size: 2em;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .spotify {
+      margin-top: 40px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h1>Airbeat One Abfahrt!</h1>
+  <div id="countdown"></div>
+
+  <div class="spotify">
+    <iframe style="border-radius:12px" 
+      src="https://open.spotify.com/embed/playlist/4eodZwGFba8adZZKTdAGvl?utm_source=generator&theme=0" 
+      width="100%" height="352" frameborder="0" allowfullscreen="" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+    </iframe>
+  </div>
+
+  <script>
+    const abfahrtsZeit = new Date("2026-07-08T05:00:00");
+
+    function updateCountdown() {
+      const jetzt = new Date();
+      const differenz = abfahrtsZeit - jetzt;
+
+      if (differenz <= 0) {
+        document.getElementById("countdown").innerHTML = "Los geht's! 🚌🍻";
+        return;
+      }
+
+      const tage = Math.floor(differenz / (1000 * 60 * 60 * 24));
+      const stunden = Math.floor((differenz / (1000 * 60 * 60)) % 24);
+      const minuten = Math.floor((differenz / (1000 * 60)) % 60);
+      const sekunden = Math.floor((differenz / 1000) % 60);
+
+      document.getElementById("countdown").innerHTML = 
+        `${tage} Tage, ${stunden} Std, ${minuten} Min, ${sekunden} Sek`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
